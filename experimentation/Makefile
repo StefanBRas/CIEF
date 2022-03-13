@@ -12,11 +12,16 @@ data/outputs/%.pdf: data/inputs/%.json
 collect: 
 	$(CLI) collect-parquets
 
-all:  create_specs collect $(OUT) 
 
 run_all: 
 	$(CLI) run-thread all
 	$(CLI) collect-parquets
+
+R:
+	Rscript R_scripts/run.R 
+
+all:  create_specs run_all 
+	Rscript R_script/run.R 
 
 run_all_fast: 
 	$(CLI) run-thread all_fast

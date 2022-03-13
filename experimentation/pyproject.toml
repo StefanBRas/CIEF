@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "experimentation"
+version = "0.1.0"
+description = "Running Step Forest experiments with Prefect"
+authors = ["Stefan B. R. <StefanBruhnR@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.8, <3.11"
+prefect = "^0.15.13"
+pydantic = "^1.9.0"
+SQLAlchemy = "^1.4.31"
+fastparquet = "^0.8.0"
+typer = "^0.4.0"
+forestpathwalk = {path = "../forestpathwalk", develop = true}
+pytest = "^7.0.1"
+
+[tool.poetry.dev-dependencies]
+ipython = "^8.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+

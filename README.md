@@ -1,14 +1,21 @@
-# MasterThesis
+# CIEF
+
+Wheels are part of the github release and the CIEF package can be used from these.
 
 ## Structure 
 ```
-├── forestpathwalk/           # Python package
-├── thesis/                   # LaTex files for thesis
+├── cief/           	      # Python package
+├── experimentation/          # Experiments
 └── README.md                 # This
 ```
 
-## Requirements
+## Requirements for building CIEF
 
 - Python 3.8
 - Poetry
-- LuaLatex (for compiling report)
+ 
+## Requirements running experiment
+
+- Python 3.8
+- Poetry
+- R 

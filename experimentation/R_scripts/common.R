@@ -36,17 +36,28 @@ clean_common  <- function(data) {
 
 clean_trace  <- function(data) {
     data_cleaned <- clean_common(data)
-    data_cleaned   <- data_cleaned %>%
-	group_by(experiment_name, iteration_index)  %>%
-	mutate(normalized_value = value / max(value))
+    if (any(data_cleaned$value > 1)) {
+	data_cleaned   <- data_cleaned %>%
+	    group_by(experiment_name, iteration_index)  %>% 
+	    mutate(normalized_value = value / max(value))
+    } else { # has already been normalized
+	data_cleaned   <- data_cleaned %>%
+	    mutate(normalized_value = value )
+    }
+
     return(data_cleaned)
 }
 
 clean_result  <- function(data) {
     data_cleaned <- clean_common(data)
+    if (any(data_cleaned$value > 1)) {
     data_cleaned   <- data_cleaned %>%
 	group_by(experiment_name, estimator)  %>%
 	mutate(normalized_value = value / max(value))
+    } else { # has already been normalized
+	data_cleaned   <- data_cleaned %>%
+	    mutate(normalized_value = value )
+    }
     return(data_cleaned)
 }
 
