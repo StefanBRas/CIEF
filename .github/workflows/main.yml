@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: install poetry 
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: 1.1.10
+      - name: Install deps
+        run: cd cief && poetry install && poetry build 
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "cief/dist/*"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+
